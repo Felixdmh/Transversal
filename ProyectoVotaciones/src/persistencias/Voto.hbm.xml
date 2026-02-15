@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 15 feb 2026, 15:25:12 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="censo_por_comunidades" name="persistencias.Voto" optimistic-lock="none" table="voto">
+        <id name="id" type="java.lang.Long">
+            <column name="ID"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="persistencias.PorcentajesRangoedad" fetch="select" name="porcentajesRangoedad">
+            <column length="30" name="NOMBRE_COMUNIDAD" not-null="true"/>
+        </many-to-one>
+        <property name="rangoEdad" type="string">
+            <column length="10" name="RANGO_EDAD" not-null="true"/>
+        </property>
+        <property name="partido" type="string">
+            <column length="1" name="PARTIDO" not-null="true"/>
+        </property>
+        <property name="fecha" type="timestamp">
+            <column length="19" name="FECHA"/>
+        </property>
+    </class>
+</hibernate-mapping>

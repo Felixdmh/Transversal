@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 15 feb 2026, 15:25:12 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="censo_por_comunidades" name="persistencias.PorcentajesRangoedad" optimistic-lock="none" table="porcentajes_rangoedad">
+        <id name="nombreComunidad" type="string">
+            <column length="30" name="NOMBRE_COMUNIDAD"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="rango19" type="int">
+            <column name="RANGO_1_9" not-null="true">
+                <comment>Porcentaje de habitantes cuya edad esta comprendida entre 1 y 9 años</comment>
+            </column>
+        </property>
+        <property name="rango1017" type="int">
+            <column name="RANGO_10_17" not-null="true">
+                <comment>Porcentaje de habitantes cuya edad esta comprendida entre 10 y 17 años</comment>
+            </column>
+        </property>
+        <property name="rango1825" type="int">
+            <column name="RANGO_18_25" not-null="true">
+                <comment>Porcentaje de habitantes cuya edad esta comprendida entre 18 y 25 años</comment>
+            </column>
+        </property>
+        <property name="rango2640" type="int">
+            <column name="RANGO_26_40" not-null="true">
+                <comment>Porcentaje de habitantes cuya edad esta comprendida entre 26 y 40 años</comment>
+            </column>
+        </property>
+        <property name="rango4165" type="int">
+            <column name="RANGO_41_65" not-null="true">
+                <comment>Porcentaje de habitantes cuya edad esta comprendida entre 41 y 65 años</comment>
+            </column>
+        </property>
+        <property name="rangoMas66" type="int">
+            <column name="RANGO_MAS_66" not-null="true">
+                <comment>Porcentaje de habitantes cuya edad es superior o igual a 66 años</comment>
+            </column>
+        </property>
+        <property name="totalHabitantes" type="int">
+            <column name="TOTAL_HABITANTES" not-null="true">
+                <comment>Numero total de habitantes que tiene la comunidad</comment>
+            </column>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="resultadoComunidads" table="resultado_comunidad">
+            <key>
+                <column length="30" name="NOMBRE_COMUNIDAD" not-null="true"/>
+            </key>
+            <one-to-many class="persistencias.ResultadoComunidad"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="votos" table="voto">
+            <key>
+                <column length="30" name="NOMBRE_COMUNIDAD" not-null="true"/>
+            </key>
+            <one-to-many class="persistencias.Voto"/>
+        </set>
+    </class>
+</hibernate-mapping>
