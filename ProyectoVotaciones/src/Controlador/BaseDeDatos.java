@@ -14,13 +14,10 @@ import persistencias.Comunidad;
 
 public class BaseDeDatos {
 
-    // =========================
     // CONEXIÓN / DESCONEXIÓN
-    // =========================
     public Connection createConnection() throws Exception {
         Connection connection = null;
 
-        // TU RUTA (relativa al proyecto). Como tu fichero está en src/resource/
         final String PROPERTIES_PATH = "src/resource/database.properties";
 
         try (FileReader fr = new FileReader(PROPERTIES_PATH)) {
@@ -36,7 +33,7 @@ public class BaseDeDatos {
             Class.forName(driver);
             connection = DriverManager.getConnection(url, user, password);
 
-            // Importante para poder hacer commit/rollback como ya estás haciendo
+
             connection.setAutoCommit(false);
 
         } catch (Exception e) {
@@ -58,9 +55,7 @@ public class BaseDeDatos {
         }
     }
 
-    // =========================
     // CONSULTAS (SQL) - PROYECTO
-    // =========================
     public List<Comunidad> selectComunidades(Connection connection) throws SQLException {
         List<Comunidad> comunidades = new ArrayList<>();
 

@@ -21,29 +21,23 @@ public class Controlador implements MouseListener, ActionListener, ListSelection
     private final Vista vista;
     private final BaseDeDatos bd;
 
-    public Controlador(Vista vista){
+    public Controlador(Vista vista){    	
         this.vista = vista;
         this.bd = new BaseDeDatos();
 
-        configurarEventos();
         cargarComunidadesAsync();
-        this.vista.btnIniciarSimulacion.addActionListener(this);
         
+    	this.vista.PanelMapa.setVisible(false);
+    	this.vista.PanelDetalle.setVisible(false);
+        
+        this.vista.btnIniciarSimulacion.addActionListener(this);
+        this.vista.btnVolverDetalle.addActionListener(this);
+        this.vista.listComunidades.addListSelectionListener(this);
+        this.vista.btnCerrar.addActionListener(this);
+
     }
 
-    private void configurarEventos() {
-        vista.btnCerrar.addActionListener(e -> System.exit(0));
-
-        vista.btnIniciarSimulacion.addActionListener(e -> {
-            System.out.println("Simulación pendiente...");
-        });
-
-        if (vista.btnVolver != null) {
-            vista.btnVolver.addActionListener(e -> {
-                System.out.println("Volver (pendiente)...");
-            });
-        }
-    }
+    
 
     private void cargarComunidadesAsync() {
         new SwingWorker<DefaultListModel<Comunidad>, Void>() {
@@ -96,6 +90,14 @@ public class Controlador implements MouseListener, ActionListener, ListSelection
 			vista.PanelMapa.setVisible(true);
 		}
 		
+		if(e.getSource() == vista.btnVolverDetalle) {
+			vista.PanelDetalle.setVisible(false);
+			vista.PanelMapa.setVisible(true);
+		}
+		
+		if(e.getSource() == vista.btnCerrar) {
+			System.exit(0);
+		}
 	}
 
 	@Override
@@ -129,8 +131,21 @@ public class Controlador implements MouseListener, ActionListener, ListSelection
 	}
 
 	@Override
-	public void valueChanged(ListSelectionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void valueChanged(ListSelectionEvent e) {
+
+        if (e.getValueIsAdjusting()) return;
+
+        if (e.getSource() == vista.listComunidades) {
+
+            Comunidad seleccionada = (Comunidad) vista.listComunidades.getSelectedValue();
+            if (seleccionada == null) return;
+
+            // 1) Cambiar al panel detalle
+            vista.PanelDetalle.setVisible(true);
+            vista.PanelMapa.setVisible(false);
+
+            // 2) Poner nombre en lblNombre
+            vista.lblNombre.setText(seleccionada.getNombreComunidad());
+        }
+    }
 }
