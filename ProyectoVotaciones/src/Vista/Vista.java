@@ -1,4 +1,4 @@
-package Vista;
+    package Vista;
 
 import java.awt.EventQueue;
 
@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
 import javax.swing.JList;
+import javax.swing.JComboBox;
+import javax.swing.JProgressBar;
 
 public class Vista extends JFrame {
 
@@ -46,6 +48,12 @@ public class Vista extends JFrame {
 	public JLabel lblEspana;
 	public JLabel lblBanderaEspana;
 	public JLabel lblFondoDetalle;
+	public JComboBox comboFiltroMapa;
+	public JComboBox comboFiltroPersonas;
+	public JList list;
+	public JProgressBar progressBar;
+	public JButton btnVolver;
+	public JLabel lblNombre;
 
 	/**
 	 * Launch the application.
@@ -77,10 +85,43 @@ public class Vista extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		PanelDetalle = new JPanel();
+		PanelDetalle.setBounds(0, 0, 986, 602);
+		contentPane.add(PanelDetalle);
+		PanelDetalle.setLayout(null);
+		
+		lblNombre = new JLabel("NombreComunidadAutonoma");
+		lblNombre.setBounds(234, 23, 442, 59);
+		PanelDetalle.add(lblNombre);
+		
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(26, 550, 145, 42);
+		PanelDetalle.add(btnVolver);
+		
+		progressBar = new JProgressBar();
+		progressBar.setBounds(115, 262, 145, 13);
+		PanelDetalle.add(progressBar);
+		
+		list = new JList();
+		list.setBounds(586, 250, 352, 309);
+		PanelDetalle.add(list);
+		
+		comboFiltroPersonas = new JComboBox();
+		comboFiltroPersonas.setBounds(586, 112, 352, 33);
+		PanelDetalle.add(comboFiltroPersonas);
+		
+		lblFondoDetalle = new JLabel("New label");
+		lblFondoDetalle.setBounds(0, 0, 986, 602);
+		PanelDetalle.add(lblFondoDetalle);
+		
 		JPanel PanelMapa = new JPanel();
 		PanelMapa.setBounds(0, 0, 986, 602);
 		contentPane.add(PanelMapa);
 		PanelMapa.setLayout(null);
+		
+		comboFiltroMapa = new JComboBox();
+		comboFiltroMapa.setBounds(612, 33, 352, 25);
+		PanelMapa.add(comboFiltroMapa);
 		
 		lblBanderaEspana = new JLabel(new ImageIcon("src/Imagenes/Bandera.png"));
 		lblBanderaEspana.setBounds(528, 83, 62, 58);
@@ -92,7 +133,7 @@ public class Vista extends JFrame {
 		
 		listComunidades = new JList();
 		listComunidades.setOpaque(false);
-		listComunidades.setBounds(616, 54, 348, 514);
+		listComunidades.setBounds(616, 75, 348, 493);
 		PanelMapa.add(listComunidades);
 		
 		lblMelilla = new JLabel(new ImageIcon("src/Imagenes/Bandera.png"));
@@ -178,15 +219,6 @@ public class Vista extends JFrame {
 		lblFondoMapa = new JLabel(new ImageIcon("src/Imagenes/FondoMapa.png"));
 		lblFondoMapa.setBounds(0, 0, 986, 602);
 		PanelMapa.add(lblFondoMapa);
-		
-		PanelDetalle = new JPanel();
-		PanelDetalle.setBounds(0, 0, 986, 602);
-		contentPane.add(PanelDetalle);
-		PanelDetalle.setLayout(null);
-		
-		lblFondoDetalle = new JLabel("New label");
-		lblFondoDetalle.setBounds(0, 0, 986, 602);
-		PanelDetalle.add(lblFondoDetalle);
 		
 		PanelInicio = new JPanel();
 		PanelInicio.setVisible(false);
