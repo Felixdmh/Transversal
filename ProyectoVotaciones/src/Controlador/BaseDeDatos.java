@@ -9,10 +9,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
 import persistencias.Comunidad;
 
 public class BaseDeDatos {
 
+    // =========================
+    // CONEXIÓN / DESCONEXIÓN
+    // =========================
     public Connection createConnection() throws Exception {
         Connection connection = null;
 
@@ -33,12 +37,12 @@ public class BaseDeDatos {
             connection = DriverManager.getConnection(url, user, password);
             connection.setAutoCommit(false);
 
-            return connection;
-
         } catch (Exception e) {
             e.printStackTrace();
-            throw e; // relanzamos la excepción concreta
+            throw e;
         }
+
+        return connection;
     }
 
     public void disconnect(Connection connection) throws SQLException {
@@ -51,10 +55,15 @@ public class BaseDeDatos {
             }
         }
     }
+
+    // =========================
+    // CONSULTAS (SQL) - PROYECTO
+    // =========================
     public List<Comunidad> selectComunidades(Connection connection) throws SQLException {
         List<Comunidad> comunidades = new ArrayList<>();
 
-        String sql = "SELECT FROM PORCENTAJES_RANGOEDAD ORDER BY NOMBRE_COMUNIDAD";
+        String sql = "SELECT * FROM PORCENTAJES_RANGOEDAD ORDER BY NOMBRE_COMUNIDAD";
+
         PreparedStatement ps = null;
         ResultSet rs = null;
 
@@ -72,6 +81,7 @@ public class BaseDeDatos {
                 c.setRango41_65(rs.getInt("RANGO_41_65"));
                 c.setRangoMas66(rs.getInt("RANGO_MAS_66"));
                 c.setTotalHabitantes(rs.getInt("TOTAL_HABITANTES"));
+
                 comunidades.add(c);
             }
 
@@ -79,8 +89,12 @@ public class BaseDeDatos {
             e.printStackTrace();
             throw e;
         } finally {
-            if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
-            if (ps != null) try { ps.close(); } catch (SQLException e) { e.printStackTrace(); }
+            if (rs != null) {
+                try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+            if (ps != null) {
+                try { ps.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
         }
 
         return comunidades;
