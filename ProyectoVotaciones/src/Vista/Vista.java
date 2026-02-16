@@ -39,6 +39,7 @@ public class Vista extends JFrame {
 	public JLabel lblAsturias; 
 	public JLabel lblGalicia; 
 	public JPanel PanelInicio; 
+	public JPanel PanelMapa; 
 	public JButton btnIniciarSimulacion; 
 	public JButton btnCerrar; 
 	public JLabel lblFotoHurna; 
@@ -85,36 +86,29 @@ public class Vista extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		PanelDetalle = new JPanel();
-		PanelDetalle.setBounds(0, 0, 986, 602);
-		contentPane.add(PanelDetalle);
-		PanelDetalle.setLayout(null);
+		PanelInicio = new JPanel();
+		PanelInicio.setBounds(0, 0, 986, 602);
+		contentPane.add(PanelInicio);
+		PanelInicio.setLayout(null);
 		
-		lblNombre = new JLabel("NombreComunidadAutonoma");
-		lblNombre.setBounds(234, 23, 442, 59);
-		PanelDetalle.add(lblNombre);
+		btnIniciarSimulacion = new JButton("INICIAR SIMULACION");
+		btnIniciarSimulacion.setBounds(258, 330, 516, 89);
+		PanelInicio.add(btnIniciarSimulacion);
 		
-		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(26, 550, 145, 42);
-		PanelDetalle.add(btnVolver);
+		btnCerrar = new JButton("SALIR");
+		btnCerrar.setBounds(384, 441, 259, 41);
+		PanelInicio.add(btnCerrar);
 		
-		progressBar = new JProgressBar();
-		progressBar.setBounds(115, 262, 145, 13);
-		PanelDetalle.add(progressBar);
+		lblFotoHurna = new JLabel(new ImageIcon("src/Imagenes/FotoHurna.png"));
+		lblFotoHurna.setBounds(353, 60, 341, 259);
+		PanelInicio.add(lblFotoHurna);
 		
-		list = new JList();
-		list.setBounds(586, 250, 352, 309);
-		PanelDetalle.add(list);
+		lblFondoInicio = new JLabel(new ImageIcon("src/Imagenes/FondoInicio.png"));
+		lblFondoInicio.setBounds(-32, -26, 1018, 628);
+		PanelInicio.add(lblFondoInicio);
 		
-		comboFiltroPersonas = new JComboBox();
-		comboFiltroPersonas.setBounds(586, 112, 352, 33);
-		PanelDetalle.add(comboFiltroPersonas);
-		
-		lblFondoDetalle = new JLabel("New label");
-		lblFondoDetalle.setBounds(0, 0, 986, 602);
-		PanelDetalle.add(lblFondoDetalle);
-		
-		JPanel PanelMapa = new JPanel();
+		PanelMapa = new JPanel();
+		PanelMapa.setVisible(false);
 		PanelMapa.setBounds(0, 0, 986, 602);
 		contentPane.add(PanelMapa);
 		PanelMapa.setLayout(null);
@@ -132,7 +126,6 @@ public class Vista extends JFrame {
 		PanelMapa.add(lblEspana);
 		
 		listComunidades = new JList();
-		listComunidades.setOpaque(false);
 		listComunidades.setBounds(616, 75, 348, 493);
 		PanelMapa.add(listComunidades);
 		
@@ -220,26 +213,34 @@ public class Vista extends JFrame {
 		lblFondoMapa.setBounds(0, 0, 986, 602);
 		PanelMapa.add(lblFondoMapa);
 		
-		PanelInicio = new JPanel();
-		PanelInicio.setVisible(false);
-		PanelInicio.setBounds(0, 0, 986, 602);
-		contentPane.add(PanelInicio);
-		PanelInicio.setLayout(null);
+		PanelDetalle = new JPanel();
+		PanelDetalle.setVisible(false);
+		PanelDetalle.setBounds(0, 0, 986, 602);
+		contentPane.add(PanelDetalle);
+		PanelDetalle.setLayout(null);
 		
-		btnIniciarSimulacion = new JButton("INICIAR SIMULACION");
-		btnIniciarSimulacion.setBounds(258, 330, 516, 89);
-		PanelInicio.add(btnIniciarSimulacion);
+		lblNombre = new JLabel("NombreComunidadAutonoma");
+		lblNombre.setBounds(234, 23, 442, 59);
+		PanelDetalle.add(lblNombre);
 		
-		btnCerrar = new JButton("SALIR");
-		btnCerrar.setBounds(384, 441, 259, 41);
-		PanelInicio.add(btnCerrar);
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(26, 550, 145, 42);
+		PanelDetalle.add(btnVolver);
 		
-		lblFotoHurna = new JLabel(new ImageIcon("src/Imagenes/FotoHurna.png"));
-		lblFotoHurna.setBounds(353, 60, 341, 259);
-		PanelInicio.add(lblFotoHurna);
+		progressBar = new JProgressBar();
+		progressBar.setBounds(115, 262, 145, 13);
+		PanelDetalle.add(progressBar);
 		
-		lblFondoInicio = new JLabel(new ImageIcon("src/Imagenes/FondoInicio.png"));
-		lblFondoInicio.setBounds(-32, -26, 1018, 628);
-		PanelInicio.add(lblFondoInicio);
+		list = new JList();
+		list.setBounds(586, 250, 352, 309);
+		PanelDetalle.add(list);
+		
+		comboFiltroPersonas = new JComboBox();
+		comboFiltroPersonas.setBounds(586, 112, 352, 33);
+		PanelDetalle.add(comboFiltroPersonas);
+		
+		lblFondoDetalle = new JLabel("New label");
+		lblFondoDetalle.setBounds(0, 0, 986, 602);
+		PanelDetalle.add(lblFondoDetalle);
 	}
 }
