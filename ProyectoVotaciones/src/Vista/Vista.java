@@ -54,6 +54,7 @@ public class Vista extends JFrame {
 	public JProgressBar progressBar;
 	public JButton btnVolver;
 	public JLabel lblNombre;
+	public JLabel lblFotoEspana;
 
 	/**
 	 * Launch the application.
@@ -113,6 +114,10 @@ public class Vista extends JFrame {
 		lblFondoDetalle = new JLabel("New label");
 		lblFondoDetalle.setBounds(0, 0, 986, 602);
 		PanelDetalle.add(lblFondoDetalle);
+		
+		lblFotoEspana = new JLabel("New label");
+		lblFotoEspana.setBounds(26, 23, 100, 73);
+		PanelDetalle.add(lblFotoEspana);
 		
 		JPanel PanelMapa = new JPanel();
 		PanelMapa.setBounds(0, 0, 986, 602);
