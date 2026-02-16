@@ -1,6 +1,6 @@
 package Controlador;
 
-import java.io.InputStream;
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,18 +15,18 @@ import persistencias.Comunidad;
 public class BaseDeDatos {
 
     // =========================
-    // CONEXIÓN / DESCONEXIÓN
+    // CONEXIÃ“N / DESCONEXIÃ“N
     // =========================
     public Connection createConnection() throws Exception {
         Connection connection = null;
 
-        try (InputStream is = getClass().getClassLoader().getResourceAsStream("database.properties")) {
-            if (is == null) {
-                throw new IllegalStateException("No se encontró database.properties en src/main/resources");
-            }
+        // TU RUTA (relativa al proyecto). Como tu fichero estÃ¡ en src/resource/
+        final String PROPERTIES_PATH = "src/resource/database.properties";
+
+        try (FileReader fr = new FileReader(PROPERTIES_PATH)) {
 
             Properties props = new Properties();
-            props.load(is);
+            props.load(fr);
 
             String driver = props.getProperty("database.driver");
             String url = props.getProperty("database.url");
@@ -35,6 +35,8 @@ public class BaseDeDatos {
 
             Class.forName(driver);
             connection = DriverManager.getConnection(url, user, password);
+
+            // Importante para poder hacer commit/rollback como ya estÃ¡s haciendo
             connection.setAutoCommit(false);
 
         } catch (Exception e) {
@@ -88,6 +90,7 @@ public class BaseDeDatos {
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
+
         } finally {
             if (rs != null) {
                 try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
