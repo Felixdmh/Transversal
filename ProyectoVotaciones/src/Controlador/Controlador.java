@@ -1,33 +1,41 @@
 package Controlador;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.SwingWorker;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import Vista.Vista;
 import persistencias.Comunidad;
 import Controlador.BaseDeDatos;
 
-public class Controlador {
+public class Controlador implements MouseListener, ActionListener, ListSelectionListener{
 
     private final Vista vista;
     private final BaseDeDatos bd;
 
-    public Controlador(Vista vista) {
+    public Controlador(Vista vista){
         this.vista = vista;
         this.bd = new BaseDeDatos();
 
         configurarEventos();
         cargarComunidadesAsync();
+        this.vista.btnIniciarSimulacion.addActionListener(this);
+        
     }
 
     private void configurarEventos() {
         vista.btnCerrar.addActionListener(e -> System.exit(0));
 
         vista.btnIniciarSimulacion.addActionListener(e -> {
-            System.out.println("Simulación pendiente...");
+            System.out.println("SimulaciÃ³n pendiente...");
         });
 
         if (vista.btnVolver != null) {
@@ -79,4 +87,50 @@ public class Controlador {
 
         }.execute();
     }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		if(e.getSource() == vista.btnIniciarSimulacion) {
+			vista.PanelInicio.setVisible(false);
+			vista.PanelMapa.setVisible(true);
+		}
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }

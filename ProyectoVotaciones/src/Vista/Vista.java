@@ -39,6 +39,7 @@ public class Vista extends JFrame {
 	public JLabel lblAsturias; 
 	public JLabel lblGalicia; 
 	public JPanel PanelInicio; 
+	public JPanel PanelMapa; 
 	public JButton btnIniciarSimulacion; 
 	public JButton btnCerrar; 
 	public JLabel lblFotoHurna; 
@@ -85,7 +86,29 @@ public class Vista extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel PanelMapa = new JPanel();
+		PanelInicio = new JPanel();
+		PanelInicio.setBounds(0, 0, 986, 602);
+		contentPane.add(PanelInicio);
+		PanelInicio.setLayout(null);
+		
+		btnIniciarSimulacion = new JButton("INICIAR SIMULACION");
+		btnIniciarSimulacion.setBounds(258, 330, 516, 89);
+		PanelInicio.add(btnIniciarSimulacion);
+		
+		btnCerrar = new JButton("SALIR");
+		btnCerrar.setBounds(384, 441, 259, 41);
+		PanelInicio.add(btnCerrar);
+		
+		lblFotoHurna = new JLabel(new ImageIcon("src/Imagenes/FotoHurna.png"));
+		lblFotoHurna.setBounds(353, 60, 341, 259);
+		PanelInicio.add(lblFotoHurna);
+		
+		lblFondoInicio = new JLabel(new ImageIcon("src/Imagenes/FondoInicio.png"));
+		lblFondoInicio.setBounds(-32, -26, 1018, 628);
+		PanelInicio.add(lblFondoInicio);
+		
+		PanelMapa = new JPanel();
+		PanelMapa.setVisible(false);
 		PanelMapa.setBounds(0, 0, 986, 602);
 		contentPane.add(PanelMapa);
 		PanelMapa.setLayout(null);
@@ -191,6 +214,7 @@ public class Vista extends JFrame {
 		PanelMapa.add(lblFondoMapa);
 		
 		PanelDetalle = new JPanel();
+		PanelDetalle.setVisible(false);
 		PanelDetalle.setBounds(0, 0, 986, 602);
 		contentPane.add(PanelDetalle);
 		PanelDetalle.setLayout(null);
@@ -218,27 +242,5 @@ public class Vista extends JFrame {
 		lblFondoDetalle = new JLabel("New label");
 		lblFondoDetalle.setBounds(0, 0, 986, 602);
 		PanelDetalle.add(lblFondoDetalle);
-		
-		PanelInicio = new JPanel();
-		PanelInicio.setVisible(false);
-		PanelInicio.setBounds(0, 0, 986, 602);
-		contentPane.add(PanelInicio);
-		PanelInicio.setLayout(null);
-		
-		btnIniciarSimulacion = new JButton("INICIAR SIMULACION");
-		btnIniciarSimulacion.setBounds(258, 330, 516, 89);
-		PanelInicio.add(btnIniciarSimulacion);
-		
-		btnCerrar = new JButton("SALIR");
-		btnCerrar.setBounds(384, 441, 259, 41);
-		PanelInicio.add(btnCerrar);
-		
-		lblFotoHurna = new JLabel(new ImageIcon("src/Imagenes/FotoHurna.png"));
-		lblFotoHurna.setBounds(353, 60, 341, 259);
-		PanelInicio.add(lblFotoHurna);
-		
-		lblFondoInicio = new JLabel(new ImageIcon("src/Imagenes/FondoInicio.png"));
-		lblFondoInicio.setBounds(-32, -26, 1018, 628);
-		PanelInicio.add(lblFondoInicio);
 	}
 }
