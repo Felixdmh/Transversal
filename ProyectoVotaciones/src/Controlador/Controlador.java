@@ -139,7 +139,7 @@ public class Controlador implements MouseListener, ActionListener, ListSelection
         vista.progressBar.setStringPainted(true);
         vista.progressBar.setString(porcentaje + "%");
 
-        // listDetalle 
+        // listDetalleeeee 
         DefaultListModel<String> model = new DefaultListModel<>();
         model.addElement("Comunidad: " + comunidadSeleccionada.getNombreComunidad());
         model.addElement("Rango seleccionado: " + rangoSeleccionado);
