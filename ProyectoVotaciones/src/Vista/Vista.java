@@ -51,7 +51,7 @@ public class Vista extends JFrame {
 	public JLabel lblFondoDetalle;
 	public JComboBox comboFiltroMapa;
 	public JComboBox comboFiltroPersonas;
-	public JList list;
+	public JList listDetalle;
 	public JProgressBar progressBar;
 	public JButton btnVolverDetalle;
 	public JLabel lblNombre;
@@ -124,9 +124,9 @@ public class Vista extends JFrame {
 		progressBar.setBounds(115, 262, 145, 13);
 		PanelDetalle.add(progressBar);
 		
-		list = new JList();
-		list.setBounds(586, 250, 352, 309);
-		PanelDetalle.add(list);
+		listDetalle = new JList();
+		listDetalle.setBounds(586, 250, 352, 309);
+		PanelDetalle.add(listDetalle);
 		
 		comboFiltroPersonas = new JComboBox();
 		comboFiltroPersonas.setBounds(586, 112, 352, 33);
