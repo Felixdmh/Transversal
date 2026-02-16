@@ -1,4 +1,4 @@
-    package Vista;
+package Vista;
 
 import java.awt.EventQueue;
 
@@ -53,7 +53,7 @@ public class Vista extends JFrame {
 	public JComboBox comboFiltroPersonas;
 	public JList list;
 	public JProgressBar progressBar;
-	public JButton btnVolver;
+	public JButton btnVolverDetalle;
 	public JLabel lblNombre;
 
 	/**
@@ -106,6 +106,35 @@ public class Vista extends JFrame {
 		lblFondoInicio = new JLabel(new ImageIcon("src/Imagenes/FondoInicio.png"));
 		lblFondoInicio.setBounds(-32, -26, 1018, 628);
 		PanelInicio.add(lblFondoInicio);
+		
+		PanelDetalle = new JPanel();
+		PanelDetalle.setBounds(0, 0, 986, 602);
+		contentPane.add(PanelDetalle);
+		PanelDetalle.setLayout(null);
+		
+		lblNombre = new JLabel("NombreComunidadAutonoma");
+		lblNombre.setBounds(234, 23, 442, 59);
+		PanelDetalle.add(lblNombre);
+		
+		btnVolverDetalle = new JButton("Volver");
+		btnVolverDetalle.setBounds(26, 550, 145, 42);
+		PanelDetalle.add(btnVolverDetalle);
+		
+		progressBar = new JProgressBar();
+		progressBar.setBounds(115, 262, 145, 13);
+		PanelDetalle.add(progressBar);
+		
+		list = new JList();
+		list.setBounds(586, 250, 352, 309);
+		PanelDetalle.add(list);
+		
+		comboFiltroPersonas = new JComboBox();
+		comboFiltroPersonas.setBounds(586, 112, 352, 33);
+		PanelDetalle.add(comboFiltroPersonas);
+		
+		lblFondoDetalle = new JLabel("New label");
+		lblFondoDetalle.setBounds(0, 0, 986, 602);
+		PanelDetalle.add(lblFondoDetalle);
 		
 		PanelMapa = new JPanel();
 		PanelMapa.setVisible(false);
@@ -212,35 +241,5 @@ public class Vista extends JFrame {
 		lblFondoMapa = new JLabel(new ImageIcon("src/Imagenes/FondoMapa.png"));
 		lblFondoMapa.setBounds(0, 0, 986, 602);
 		PanelMapa.add(lblFondoMapa);
-		
-		PanelDetalle = new JPanel();
-		PanelDetalle.setVisible(false);
-		PanelDetalle.setBounds(0, 0, 986, 602);
-		contentPane.add(PanelDetalle);
-		PanelDetalle.setLayout(null);
-		
-		lblNombre = new JLabel("NombreComunidadAutonoma");
-		lblNombre.setBounds(234, 23, 442, 59);
-		PanelDetalle.add(lblNombre);
-		
-		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(26, 550, 145, 42);
-		PanelDetalle.add(btnVolver);
-		
-		progressBar = new JProgressBar();
-		progressBar.setBounds(115, 262, 145, 13);
-		PanelDetalle.add(progressBar);
-		
-		list = new JList();
-		list.setBounds(586, 250, 352, 309);
-		PanelDetalle.add(list);
-		
-		comboFiltroPersonas = new JComboBox();
-		comboFiltroPersonas.setBounds(586, 112, 352, 33);
-		PanelDetalle.add(comboFiltroPersonas);
-		
-		lblFondoDetalle = new JLabel("New label");
-		lblFondoDetalle.setBounds(0, 0, 986, 602);
-		PanelDetalle.add(lblFondoDetalle);
 	}
 }
