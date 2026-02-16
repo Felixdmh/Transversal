@@ -25,7 +25,6 @@ public class Controlador implements MouseListener, ActionListener, ListSelection
         this.vista = vista;
         this.bd = new BaseDeDatos();
 
-        configurarEventos();
         cargarComunidadesAsync();
         
     	this.vista.PanelMapa.setVisible(false);
@@ -34,22 +33,11 @@ public class Controlador implements MouseListener, ActionListener, ListSelection
         this.vista.btnIniciarSimulacion.addActionListener(this);
         this.vista.btnVolverDetalle.addActionListener(this);
         this.vista.listComunidades.addListSelectionListener(this);
+        this.vista.btnCerrar.addActionListener(this);
 
     }
 
-    private void configurarEventos() {
-        vista.btnCerrar.addActionListener(e -> System.exit(0));
-
-        vista.btnIniciarSimulacion.addActionListener(e -> {
-            System.out.println("Simulación pendiente...");
-        });
-
-        if (vista.btnVolverDetalle != null) {
-            vista.btnVolverDetalle.addActionListener(e -> {
-                System.out.println("Volver (pendiente)...");
-            });
-        }
-    }
+    
 
     private void cargarComunidadesAsync() {
         new SwingWorker<DefaultListModel<Comunidad>, Void>() {
@@ -107,6 +95,9 @@ public class Controlador implements MouseListener, ActionListener, ListSelection
 			vista.PanelMapa.setVisible(true);
 		}
 		
+		if(e.getSource() == vista.btnCerrar) {
+			System.exit(0);
+		}
 	}
 
 	@Override
