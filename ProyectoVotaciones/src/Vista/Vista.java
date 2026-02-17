@@ -52,7 +52,6 @@ public class Vista extends JFrame {
 	public JComboBox comboFiltroMapa;
 	public JComboBox comboFiltroPersonas;
 	public JList listDetalle;
-	public JProgressBar progressBar;
 	public JButton btnVolverDetalle;
 	public JLabel lblNombre;
 
@@ -107,6 +106,9 @@ public class Vista extends JFrame {
 		lblFondoInicio.setBounds(-32, -26, 1018, 628);
 		PanelInicio.add(lblFondoInicio);
 		
+		PanelMapa = new JPanel();
+		PanelMapa.setVisible(false);
+		
 		PanelDetalle = new JPanel();
 		PanelDetalle.setBounds(0, 0, 986, 602);
 		contentPane.add(PanelDetalle);
@@ -120,12 +122,8 @@ public class Vista extends JFrame {
 		btnVolverDetalle.setBounds(26, 550, 145, 42);
 		PanelDetalle.add(btnVolverDetalle);
 		
-		progressBar = new JProgressBar();
-		progressBar.setBounds(115, 262, 145, 13);
-		PanelDetalle.add(progressBar);
-		
 		listDetalle = new JList();
-		listDetalle.setBounds(586, 250, 352, 309);
+		listDetalle.setBounds(586, 170, 352, 309);
 		PanelDetalle.add(listDetalle);
 		
 		comboFiltroPersonas = new JComboBox();
@@ -135,9 +133,6 @@ public class Vista extends JFrame {
 		lblFondoDetalle = new JLabel("New label");
 		lblFondoDetalle.setBounds(0, 0, 986, 602);
 		PanelDetalle.add(lblFondoDetalle);
-		
-		PanelMapa = new JPanel();
-		PanelMapa.setVisible(false);
 		PanelMapa.setBounds(0, 0, 986, 602);
 		contentPane.add(PanelMapa);
 		PanelMapa.setLayout(null);
