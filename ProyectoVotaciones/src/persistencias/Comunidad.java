@@ -9,6 +9,8 @@ public class Comunidad {
 	private int rango41_65;
 	private int rangoMas66;
 	private int totalHabitantes;
+	private String partidoGanador;
+
 
 	public Comunidad() {
 	}
@@ -76,9 +78,54 @@ public class Comunidad {
 	public void setTotalHabitantes(int totalHabitantes) {
 		this.totalHabitantes = totalHabitantes;
 	}
+	
+	public String getPartidoGanador() {
+		return partidoGanador;
+	}
+
+	public void setPartidoGanador(String partidoGanador) {
+		this.partidoGanador = partidoGanador;
+	}
 
 	@Override
 	public String toString() {
-		return nombreComunidad;
+	    if (partidoGanador != null) {
+	        return nombreComunidad + " - " + partidoGanador;
+	    }
+	    return nombreComunidad;
 	}
+
+	
+	// Calcula habitantes reales de un rango según su porcentaje
+	public int calcularHabitantesRango(int porcentaje) {
+	    return (totalHabitantes * porcentaje) / 100;
+	}
+
+	
+	// Calcula número de hilos (1 hilo por cada 100.000 habitantes)
+	public int calcularHilosRango(int porcentaje) {
+
+	    int habitantesRango = calcularHabitantesRango(porcentaje);
+
+	    int hilos = habitantesRango / 100000;
+
+	    // Redondeo hacia arriba
+	    if (habitantesRango % 100000 != 0) {
+	        hilos++;
+	    }
+
+	    return hilos;
+	}
+
+	
+	// Aplica mínimo 5 hilos si la comunidad tiene menos de 500.000 habitantes
+	public int aplicarMinimoHilos(int hilos) {
+	    if (totalHabitantes < 500000 && hilos < 5) {
+	        return 5;
+	    }
+	    return hilos;
+	}
+
+
+
 }
