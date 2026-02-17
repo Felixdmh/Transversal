@@ -35,7 +35,7 @@ public class HiloVotante extends Thread {
 		}
 	}
 
-	private String calcularPartido(int numero) {
+	 String calcularPartido(int numero) {
 
 		if (rangoEdad.equals("18_25")) {
 			if (numero <= 30)
