@@ -97,4 +97,23 @@ public class BaseDeDatos {
 
         return comunidades;
     }
+    
+    
+    public void insertarVoto(Connection con, String comunidad, String rango, String partido) throws Exception {
+
+        String sql = "INSERT INTO VOTO (NOMBRE_COMUNIDAD, RANGO_EDAD, PARTIDO) VALUES (?, ?, ?)";
+
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, comunidad);
+            ps.setString(2, rango);
+            ps.setString(3, partido);
+            ps.executeUpdate();
+        } finally {
+            if (ps != null) ps.close();
+        }
+    }
+    
 }
