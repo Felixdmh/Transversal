@@ -7,7 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import persistencias.Comunidad;
@@ -97,4 +99,164 @@ public class BaseDeDatos {
 
         return comunidades;
     }
+    
+    public void insertarVoto(Connection con, String comunidad, String rango, String partido) throws Exception {
+
+        String sql = "INSERT INTO VOTO (NOMBRE_COMUNIDAD, RANGO_EDAD, PARTIDO) VALUES (?, ?, ?)";
+
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, comunidad);
+            ps.setString(2, rango);
+            ps.setString(3, partido);
+            ps.executeUpdate();
+        } finally {
+            if (ps != null) ps.close();
+        }
+    }
+
+    public String obtenerGanadorPorComunidad(Connection con, String comunidad) throws Exception {
+
+        String sql = """
+            SELECT PARTIDO, COUNT(*) AS TOTAL
+            FROM VOTO
+            WHERE NOMBRE_COMUNIDAD = ?
+            GROUP BY PARTIDO
+            ORDER BY TOTAL DESC
+            LIMIT 1
+        """;
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, comunidad);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("PARTIDO");
+            }
+
+        } finally {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+        }
+
+        return "SIN DATOS";
+    }
+    
+    public String obtenerGanadorEspana(Connection con) throws Exception {
+
+        String sql = """
+            SELECT PARTIDO, COUNT(*) AS TOTAL
+            FROM VOTO
+            GROUP BY PARTIDO
+            ORDER BY TOTAL DESC
+            LIMIT 1
+        """;
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("PARTIDO");
+            }
+
+        } finally {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+        }
+
+        return "SIN DATOS";
+    }
+
+    public Map<String, Integer> obtenerVotosPorComunidad(Connection con, String comunidad) throws Exception {
+
+        Map<String, Integer> resultados = new HashMap<>();
+
+        String sql = """
+            SELECT PARTIDO, COUNT(*) AS TOTAL
+            FROM VOTO
+            WHERE NOMBRE_COMUNIDAD = ?
+            GROUP BY PARTIDO
+        """;
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, comunidad);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                resultados.put(rs.getString("PARTIDO"),
+                               rs.getInt("TOTAL"));
+            }
+
+        } finally {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+        }
+
+        return resultados;
+    }
+
+    public Map<String, Integer> obtenerVotosPorComunidadYRango(
+            Connection con,
+            String comunidad,
+            String rangoEdad) throws Exception {
+
+        Map<String, Integer> resultados = new HashMap<>();
+
+        String sql;
+
+        if (rangoEdad == null) {
+
+            sql = """
+                SELECT PARTIDO, COUNT(*) AS TOTAL
+                FROM VOTO
+                WHERE NOMBRE_COMUNIDAD = ?
+                GROUP BY PARTIDO
+            """;
+
+        } else {
+
+            sql = """
+                SELECT PARTIDO, COUNT(*) AS TOTAL
+                FROM VOTO
+                WHERE NOMBRE_COMUNIDAD = ?
+                AND RANGO_EDAD = ?
+                GROUP BY PARTIDO
+            """;
+        }
+
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, comunidad);
+
+        if (rangoEdad != null) {
+            ps.setString(2, rangoEdad);
+        }
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            resultados.put(rs.getString("PARTIDO"),
+                           rs.getInt("TOTAL"));
+        }
+
+        rs.close();
+        ps.close();
+
+        return resultados;
+    }
+
+
 }
