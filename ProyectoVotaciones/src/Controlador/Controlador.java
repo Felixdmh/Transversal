@@ -55,7 +55,7 @@ public class Controlador implements MouseListener, ActionListener, ListSelection
 
 		this.vista.listComunidades.addListSelectionListener(this);
 
-		// IMPORTANTE: para combos usamos ActionListener también
+		// IMPORTANTE: para combos usamos ActionListener tambiï¿½n
 		this.vista.comboFiltroMapa.addActionListener(this);
 		this.vista.comboFiltroPersonas.addActionListener(this);
 
@@ -144,7 +144,7 @@ public class Controlador implements MouseListener, ActionListener, ListSelection
 			System.exit(0);
 		}
 
-		// ---- INICIAR SIMULACIÓN
+		// ---- INICIAR SIMULACIï¿½N
 		if (e.getSource() == vista.btnIniciarSimulacion) {
 
 			vista.PanelInicio.setVisible(false);
@@ -173,7 +173,6 @@ public class Controlador implements MouseListener, ActionListener, ListSelection
 				conexionGlobal.commit();
 				bd.disconnect(conexionGlobal);
 
-				System.out.println("Simulación terminada");
 				actualizarListaGanadores();
 
 				Connection con = bd.createConnection();

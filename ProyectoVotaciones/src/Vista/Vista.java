@@ -12,6 +12,9 @@ import javax.swing.JCheckBox;
 import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.JProgressBar;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Color;
 
 public class Vista extends JFrame {
 
@@ -48,7 +51,6 @@ public class Vista extends JFrame {
 	public JPanel PanelDetalle;
 	public JLabel lblEspana;
 	public JLabel lblBanderaEspana;
-	public JLabel lblFondoDetalle;
 	public JComboBox comboFiltroMapa;
 	public JComboBox comboFiltroPersonas;
 	public JList listDetalle;
@@ -103,36 +105,44 @@ public class Vista extends JFrame {
 		PanelInicio.add(lblFotoHurna);
 		
 		lblFondoInicio = new JLabel(new ImageIcon("src/Imagenes/FondoInicio.png"));
-		lblFondoInicio.setBounds(-32, -26, 1018, 628);
+		lblFondoInicio.setBounds(-18, -26, 1018, 628);
 		PanelInicio.add(lblFondoInicio);
 		
 		PanelMapa = new JPanel();
 		PanelMapa.setVisible(false);
 		
-		PanelDetalle = new JPanel();
-		PanelDetalle.setBounds(0, 0, 986, 602);
-		contentPane.add(PanelDetalle);
-		PanelDetalle.setLayout(null);
+		PanelDetalle = new JPanel() {
+
+		    private Image fondo = new ImageIcon(getClass().getResource("/Imagenes/FondoPaginaDetalle.png")).getImage();
+
+		    @Override
+		    protected void paintComponent(java.awt.Graphics g) {
+		        super.paintComponent(g);
+		        g.drawImage(fondo, 0, 0, getWidth(), getHeight(), this);
+		    }
+		};
 		
-		lblNombre = new JLabel("NombreComunidadAutonoma");
-		lblNombre.setBounds(234, 23, 442, 59);
-		PanelDetalle.add(lblNombre);
-		
-		btnVolverDetalle = new JButton("Volver");
-		btnVolverDetalle.setBounds(26, 550, 145, 42);
-		PanelDetalle.add(btnVolverDetalle);
-		
-		listDetalle = new JList();
-		listDetalle.setBounds(586, 170, 352, 309);
-		PanelDetalle.add(listDetalle);
-		
-		comboFiltroPersonas = new JComboBox();
-		comboFiltroPersonas.setBounds(586, 112, 352, 33);
-		PanelDetalle.add(comboFiltroPersonas);
-		
-		lblFondoDetalle = new JLabel("New label");
-		lblFondoDetalle.setBounds(0, 0, 986, 602);
-		PanelDetalle.add(lblFondoDetalle);
+				PanelDetalle.setBounds(0, 0, 986, 602);
+				contentPane.add(PanelDetalle);
+				PanelDetalle.setLayout(null);
+				
+						
+						lblNombre = new JLabel("NombreComunidadAutonoma");
+						lblNombre.setFont(new Font("Stencil", Font.BOLD, 26));
+						lblNombre.setBounds(99, 25, 488, 111);
+						PanelDetalle.add(lblNombre);
+						
+						btnVolverDetalle = new JButton("Volver");
+						btnVolverDetalle.setBounds(26, 550, 145, 42);
+						PanelDetalle.add(btnVolverDetalle);
+						
+						listDetalle = new JList();
+						listDetalle.setBounds(586, 170, 352, 309);
+						PanelDetalle.add(listDetalle);
+						
+						comboFiltroPersonas = new JComboBox();
+						comboFiltroPersonas.setBounds(586, 112, 352, 33);
+						PanelDetalle.add(comboFiltroPersonas);
 		PanelMapa.setBounds(0, 0, 986, 602);
 		contentPane.add(PanelMapa);
 		PanelMapa.setLayout(null);
