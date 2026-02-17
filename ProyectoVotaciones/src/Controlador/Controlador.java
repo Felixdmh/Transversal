@@ -33,7 +33,6 @@ public class Controlador implements MouseListener, ActionListener, ListSelection
 	private final Vista vista;
 	private final BaseDeDatos bd;
 
-	// Guardamos la comunidad seleccionada para usarla en PanelDetalle
 	private Comunidad comunidadSeleccionada;
 	private List<Thread> listaHilos = new ArrayList<>();
 	private List<Comunidad> listaOriginalComunidades = new ArrayList<>();
@@ -43,35 +42,30 @@ public class Controlador implements MouseListener, ActionListener, ListSelection
 		this.vista = vista;
 		this.bd = new BaseDeDatos();
 
-		// ===== Panel inicial al arrancar =====
 		this.vista.PanelInicio.setVisible(true);
 		this.vista.PanelMapa.setVisible(false);
 		this.vista.PanelDetalle.setVisible(false);
 
-		// ===== Listeners =====
 		this.vista.btnIniciarSimulacion.addActionListener(this);
 		this.vista.btnVolverDetalle.addActionListener(this);
 		this.vista.btnCerrar.addActionListener(this);
 
 		this.vista.listComunidades.addListSelectionListener(this);
 
-		// IMPORTANTE: para combos usamos ActionListener tambi�n
 		this.vista.comboFiltroMapa.addActionListener(this);
 		this.vista.comboFiltroPersonas.addActionListener(this);
 
-		// ===== Paso A: rellenar combos =====
+		// rellenar combos
 		cargarFiltros();
 
-		// ===== Cargar comunidades desde BBDD =====
+		//Cargar comunidades desde BBDD
 		cargarComunidadesAsync();
 	}
 
-	// =========================
-	// PASO A: CARGAR FILTROS
-	// =========================
+	//CARGAR FILTROS
 	private void cargarFiltros() {
 
-		// ---- comboFiltroMapa (global) ----
+		//comboFiltroMapa (global)
 		DefaultComboBoxModel<String> modelMapa = new DefaultComboBoxModel<>();
 		modelMapa.addElement("Mostrar todas");
 		modelMapa.addElement("PP");
@@ -82,7 +76,7 @@ public class Controlador implements MouseListener, ActionListener, ListSelection
 		vista.comboFiltroMapa.setModel(modelMapa);
 		vista.comboFiltroMapa.setSelectedIndex(0);
 
-		// ---- comboFiltroPersonas (detalle) ----
+		// comboFiltroPersonas(detalle)
 		DefaultComboBoxModel<String> modelPersonas = new DefaultComboBoxModel<>();
 		modelPersonas.addElement("Selecciona rango de edad");
 		modelPersonas.addElement("18-25");
@@ -139,12 +133,12 @@ public class Controlador implements MouseListener, ActionListener, ListSelection
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		// ---- SALIR ----
+		//SALIR 
 		if (e.getSource() == vista.btnCerrar) {
 			System.exit(0);
 		}
 
-		// ---- INICIAR SIMULACI�N
+		// INICIAR SIMULACIoN
 		if (e.getSource() == vista.btnIniciarSimulacion) {
 
 			vista.PanelInicio.setVisible(false);
@@ -193,7 +187,6 @@ public class Controlador implements MouseListener, ActionListener, ListSelection
 			return;
 		}
 
-		// ---- CAMBIO EN comboFiltroMapa ----
 		if (e.getSource() == vista.comboFiltroMapa) {
 
 			String opcion = (String) vista.comboFiltroMapa.getSelectedItem();
@@ -205,7 +198,6 @@ public class Controlador implements MouseListener, ActionListener, ListSelection
 			return;
 		}
 
-		// ---- CAMBIO EN comboFiltroPersonas ----
 		if (e.getSource() == vista.comboFiltroPersonas) {
 			if (e.getSource() == vista.comboFiltroPersonas) {
 
@@ -241,7 +233,7 @@ public class Controlador implements MouseListener, ActionListener, ListSelection
 		}
 	}
 
-	// CLICK EN LISTA DE CCAA -> IR A DETALLE
+	// ccaa de listComunidades para ir a su detalle
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 
@@ -255,15 +247,12 @@ public class Controlador implements MouseListener, ActionListener, ListSelection
 
 			this.comunidadSeleccionada = seleccionada;
 
-			// Cambiar panel
 			vista.PanelMapa.setVisible(false);
 			vista.PanelDetalle.setVisible(true);
 
-			// Poner nombre
 			vista.lblNombre.setText(seleccionada.getNombreComunidad());
 			mostrarGraficoComunidad(seleccionada.getNombreComunidad(), null);
 
-			// Resetear el combo de personas al entrar
 			vista.comboFiltroPersonas.setSelectedIndex(0);
 
 			if (vista.listDetalle != null) {

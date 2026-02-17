@@ -35,7 +35,7 @@ public class HiloVotante extends Thread {
 		}
 	}
 
-	 String calcularPartido(int numero) {
+	public String calcularPartido(int numero) { // public mejor que private para los test maven
 
 		if (rangoEdad.equals("18_25")) {
 			if (numero <= 30)
